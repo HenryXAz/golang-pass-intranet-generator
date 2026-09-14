@@ -5,10 +5,10 @@ async function copyTextToClipboard(buttonId, source) {
    
     try {
         const passContent = content.firstChild; 
-        await navigator.clipboard.writeText(passContent.textContent);
+        await navigator.clipboard.writeText(passContent.textContent.trim());
 
         button.style.backgroundColor = '#00a63e';
-        button.innerText = 'Copied!!';
+        button.innerText = 'Copied';
 
         setTimeout(() => {
             button.style.backgroundColor = '#333';
@@ -25,4 +25,9 @@ async function copyTextToClipboard(buttonId, source) {
 
         console.log(error); 
     }
+}
+
+function eraseValues() {
+    document.getElementById('sha256-pass').innerText = ' ';
+    document.getElementById('bcrypt-pass').innerText = ' ';
 }

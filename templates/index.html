@@ -4,209 +4,272 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{.Title}}</title>
+    <link rel="stylesheet" href="/static/main.css">
 </head>
-<body> 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: #111;
-            color: #eee;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        h1 {
-            text-align: center;
-            margin: .8em;
-        }
-
-        label {
-            display: inline-block;
-            width: 100%;
-        }
-
-        input {
-            display: inline-block;
-            width: 100%;
-            margin: .8em;
-            padding: .8em;
-            background-color: #444;
-            color: #eee;
-            outline: none;
-            border: 1px solid #51a2ff;
-            border-radius: .8em;
-            font-size: 1em;
-        }
-
-        button {
-            background-color: #155dfc;
-            color: #eee;
-            border: none;
-            outline: none;
-            padding: .8em;
-            border-radius: .8em;
-            font-weight: 700;
-        }
-
-        p {
-            padding: .8em;
-            margin: .8em auto;
-            width:  100%;
-            border: 1px solid #555;
-            border-radius: .8em;
-        }
-
-        .container {
-            max-width: 1400px;
-            width: 100%;
-            margin: 2em auto;
-            padding: .8em;
-            background-color: #222;
-        }
-
-        .form-container {
-            margin: 1em auto;
-            padding: 2em;
-            border: 1px solid #555;
-            border-radius: .8em;
-        }
-
-        .result-container {
-            display: inline-block;
-            padding: 1em;
-            color: #fff;
-            background-color: #444;
-            border-radius: .8em;
-        }
-
-        .clipboard {
-            width: 25px;
-            display: inline-block;
-        }
-
-        .clipboard-button {
-            background-color: #333;
-            padding: .8em;
-        }
-
-        .clipboard-button:hover {
-            background-color: #222;
-            cursor: pointer; 
-        }
-
-        .danger {
-            background-color: #c10007;
-            color: #eee;
-            border-radius: .8em;
-            padding: .8em;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .padlock-container {
-            padding: .8em;
-            background-color: rgba(81, 162, 255, 0.2);
-            height: 60px;
-            margin-right: .5em;
-            border-radius: .8em;
-        }
-
-        .header-container {
-            display: flex;
-            width: 100%; 
-            gap: 1em;
-            justify-content: space-between;
-        }
-
-        .right-header-container {
-            display: grid;
-            align-items: center;
-            grid-template-columns: 1fr 10fr;
-        }
-
-        .title-container {
-            margin: .8em;
-        }
-
-        .header-p {
-            border: none;
-        }
-
-    </style>
-
-    <div class="container">
- 
+<body>
+<div class="container">
     <p class="danger hidden" id="error-card">
-        ⚠ Something went wrong, verify logs 
+        ⚠ Something went wrong, verify logs
     </p>
 
-    <div class="header-container" >
-        <div class="right-header-container" >
+    <div class="header-container">
+        <div class="left-header-container">
             <div class="padlock-container">
-                <svg width="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#51a2ff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8.1819 10.7027H6.00008C5.44781 10.7027 5.0001 11.1485 5.00009 11.7008C5.00005 13.3483 5 16.6772 5.00011 18.9189C5.00023 21.4317 8.88618 22 12 22C15.1139 22 19 21.4317 19 18.9189C19 16.6773 19 13.3483 19 11.7008C19 11.1485 18.5523 10.7027 18 10.7027H15.8182M8.1819 10.7027C8.1819 10.7027 8.18193 8.13514 8.1819 6.59459C8.18186 4.74571 9.70887 3 12 3C14.2912 3 15.8182 4.74571 15.8182 6.59459C15.8182 8.13514 15.8182 10.7027 15.8182 10.7027M8.1819 10.7027H15.8182" stroke="#51a2ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M13 16.6181V18C13 18.5523 12.5523 19 12 19C11.4477 19 11 18.5523 11 18V16.6181C10.6931 16.3434 10.5 15.9442 10.5 15.5C10.5 14.6716 11.1716 14 12 14C12.8284 14 13.5 14.6716 13.5 15.5C13.5 15.9442 13.3069 16.3434 13 16.6181Z" fill="#51a2ff"></path> </g></svg>
+                <svg width="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#51a2ff">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path d="M8.1819 10.7027H6.00008C5.44781 10.7027 5.0001 11.1485 5.00009 11.7008C5.00005 13.3483 5 16.6772 5.00011 18.9189C5.00023 21.4317 8.88618 22 12 22C15.1139 22 19 21.4317 19 18.9189C19 16.6773 19 13.3483 19 11.7008C19 11.1485 18.5523 10.7027 18 10.7027H15.8182M8.1819 10.7027C8.1819 10.7027 8.18193 8.13514 8.1819 6.59459C8.18186 4.74571 9.70887 3 12 3C14.2912 3 15.8182 4.74571 15.8182 6.59459C15.8182 8.13514 15.8182 10.7027 15.8182 10.7027M8.1819 10.7027H15.8182"
+                              stroke="#51a2ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M13 16.6181V18C13 18.5523 12.5523 19 12 19C11.4477 19 11 18.5523 11 18V16.6181C10.6931 16.3434 10.5 15.9442 10.5 15.5C10.5 14.6716 11.1716 14 12 14C12.8284 14 13.5 14.6716 13.5 15.5C13.5 15.9442 13.3069 16.3434 13 16.6181Z"
+                              fill="#51a2ff"></path>
+                    </g>
+                </svg>
             </div>
             <div>
-                <h1 style="text-align: left; padding: 0; margin: 0" >Password Session Generator</h1>
+                <h1 style="text-align: left; padding: 0; margin: 0">Password Session Generator</h1>
                 <p style="padding: 0; margin: 0; border:none;">
-                Generate the values to authentication in dev environment
-            </p>
+                    Generate values to authentication in dev environment
+                </p>
             </div>
         </div>
-        <div>
-            <h2>Secure</h2>
-            <p>Only for dev environment</p>
+        <div class="right-header-container">
+            <div class="gear-container">
+                <svg width="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#00c950">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z"
+                              stroke="#00c950" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M12.9046 3.06005C12.6988 3 12.4659 3 12 3C11.5341 3 11.3012 3 11.0954 3.06005C10.7942 3.14794 10.5281 3.32808 10.3346 3.57511C10.2024 3.74388 10.1159 3.96016 9.94291 4.39272C9.69419 5.01452 9.00393 5.33471 8.36857 5.123L7.79779 4.93281C7.3929 4.79785 7.19045 4.73036 6.99196 4.7188C6.70039 4.70181 6.4102 4.77032 6.15701 4.9159C5.98465 5.01501 5.83376 5.16591 5.53197 5.4677C5.21122 5.78845 5.05084 5.94882 4.94896 6.13189C4.79927 6.40084 4.73595 6.70934 4.76759 7.01551C4.78912 7.2239 4.87335 7.43449 5.04182 7.85566C5.30565 8.51523 5.05184 9.26878 4.44272 9.63433L4.16521 9.80087C3.74031 10.0558 3.52786 10.1833 3.37354 10.3588C3.23698 10.5141 3.13401 10.696 3.07109 10.893C3 11.1156 3 11.3658 3 11.8663C3 12.4589 3 12.7551 3.09462 13.0088C3.17823 13.2329 3.31422 13.4337 3.49124 13.5946C3.69158 13.7766 3.96395 13.8856 4.50866 14.1035C5.06534 14.3261 5.35196 14.9441 5.16236 15.5129L4.94721 16.1584C4.79819 16.6054 4.72367 16.829 4.7169 17.0486C4.70875 17.3127 4.77049 17.5742 4.89587 17.8067C5.00015 18.0002 5.16678 18.1668 5.5 18.5C5.83323 18.8332 5.99985 18.9998 6.19325 19.1041C6.4258 19.2295 6.68733 19.2913 6.9514 19.2831C7.17102 19.2763 7.39456 19.2018 7.84164 19.0528L8.36862 18.8771C9.00393 18.6654 9.6942 18.9855 9.94291 19.6073C10.1159 20.0398 10.2024 20.2561 10.3346 20.4249C10.5281 20.6719 10.7942 20.8521 11.0954 20.94C11.3012 21 11.5341 21 12 21C12.4659 21 12.6988 21 12.9046 20.94C13.2058 20.8521 13.4719 20.6719 13.6654 20.4249C13.7976 20.2561 13.8841 20.0398 14.0571 19.6073C14.3058 18.9855 14.9961 18.6654 15.6313 18.8773L16.1579 19.0529C16.605 19.2019 16.8286 19.2764 17.0482 19.2832C17.3123 19.2913 17.5738 19.2296 17.8063 19.1042C17.9997 18.9999 18.1664 18.8333 18.4996 18.5001C18.8328 18.1669 18.9994 18.0002 19.1037 17.8068C19.2291 17.5743 19.2908 17.3127 19.2827 17.0487C19.2759 16.8291 19.2014 16.6055 19.0524 16.1584L18.8374 15.5134C18.6477 14.9444 18.9344 14.3262 19.4913 14.1035C20.036 13.8856 20.3084 13.7766 20.5088 13.5946C20.6858 13.4337 20.8218 13.2329 20.9054 13.0088C21 12.7551 21 12.4589 21 11.8663C21 11.3658 21 11.1156 20.9289 10.893C20.866 10.696 20.763 10.5141 20.6265 10.3588C20.4721 10.1833 20.2597 10.0558 19.8348 9.80087L19.5569 9.63416C18.9478 9.26867 18.6939 8.51514 18.9578 7.85558C19.1262 7.43443 19.2105 7.22383 19.232 7.01543C19.2636 6.70926 19.2003 6.40077 19.0506 6.13181C18.9487 5.94875 18.7884 5.78837 18.4676 5.46762C18.1658 5.16584 18.0149 5.01494 17.8426 4.91583C17.5894 4.77024 17.2992 4.70174 17.0076 4.71872C16.8091 4.73029 16.6067 4.79777 16.2018 4.93273L15.6314 5.12287C14.9961 5.33464 14.3058 5.0145 14.0571 4.39272C13.8841 3.96016 13.7976 3.74388 13.6654 3.57511C13.4719 3.32808 13.2058 3.14794 12.9046 3.06005Z"
+                              stroke="#00c950" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </g>
+                </svg>
+            </div>
+            <div>
+                <h2 style="font-size: 1.5em; margin: 0; padding: 0;">Secure</h2>
+                <p style="border: none; margin: 0; padding: 0; font-size: .8em">Only for dev environment</p>
+            </div>
         </div>
     </div>
 
 
+    <div class="left-header-container" style="margin-top: 3em;">
+        <div>
+            <svg width="30px" fill="rgb(81, 162, 255)" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                 stroke="rgb(81, 162, 255)">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path d="M31.449 6.748c-0.337-0.155-0.737-0.096-1.017 0.152l-5.041 4.528-4.551-4.669 4.506-5.204c0.245-0.283 0.305-0.673 0.152-1.016s-0.489-0.553-0.86-0.553h-0.271c-2.785 0-7.593 0.239-9.739 2.417l-0.433 0.43c-2.29 2.337-2.697 6.168-1.49 9.081l-11.54 11.778c-1.556 1.578-1.556 4.135 0 5.713l1.409 1.428c0.778 0.788 1.798 1.183 2.818 1.183s2.040-0.395 2.817-1.183l11.71-11.804c1.107 0.599 2.625 0.989 3.899 0.989 2.043 0 3.98-0.824 5.454-2.32l0.427-0.433c2.331-2.364 2.296-7.416 2.306-9.638 0.001-0.378-0.216-0.721-0.554-0.878zM28.302 15.906l-0.371 0.433c-1.117 1.134-2.578 1.677-4.114 1.677-0.76 0-1.784-0.143-2.476-0.431-0.625-0.259-1.206-0.634-1.725-1.107l-12.818 12.925c-0.376 0.382-0.876 0.592-1.408 0.592s-1.032-0.21-1.409-0.592l-1.408-1.427c-0.777-0.788-0.777-2.070-0.001-2.857l12.524-12.777c-0.42-0.611-0.706-1.278-0.877-1.968h-0.001c-0.482-1.95-0.201-4.644 1.313-6.189l0.431-0.435c1.298-1.317 4.67-1.707 6.537-1.822l-3.668 4.236c-0.328 0.379-0.311 0.95 0.038 1.309l5.798 5.948c0.352 0.362 0.92 0.383 1.299 0.047l4.082-3.676c-0.122 1.98-0.506 4.856-1.748 6.115z"></path>
+                </g>
+            </svg>
+        </div>
+        <div>
+            <h2 style="margin:0;padding:0;">
+                Password
+            </h2>
+            <p style="border: none; padding:0; margin:0;">
+                Enter the password to generate session and database values
+            </p>
+        </div>
+    </div>
 
     <div class="form-container">
-        <form method="POST" action="">
+        <form method="POST" action="" class="password-form">
             <label for="plain_pass">
-                Ingrese contraseña:
-                <input type="text" id="plain_pass" name="plain_pass" />
+                <input type="text" id="plain_pass" name="plain_pass" autocomplete="off"/>
             </label>
 
             <div class="button-container">
-                <button type="submit">
-                    Generate
+                <button type="submit" class="password-form-submit">
+                    <svg width="30px" fill="#000000" viewBox="0 0 24 24" id="thunder" data-name="Flat Color"
+                         xmlns="http://www.w3.org/2000/svg" class="icon flat-color">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path id="primary"
+                                  d="M18.82,9.18A2,2,0,0,0,17,8H15.19l1.33-3.26a2,2,0,0,0-.19-1.84A2.06,2.06,0,0,0,14.62,2H10.28A2,2,0,0,0,8.37,3.27l-3.23,8a2,2,0,0,0,.2,1.83,2.06,2.06,0,0,0,1.71.9H9.81L8,20.74a1,1,0,0,0,.5,1.15A1.12,1.12,0,0,0,9,22a1,1,0,0,0,.76-.35l8.8-10.37A2,2,0,0,0,18.82,9.18Z"
+                                  style="fill: #fff;"></path>
+                        </g>
+                    </svg>
+                    Generate values
                 </button>
             </div>
-        </form>     
+        </form>
+    </div>
+
+    {{ if or (ne .Sha256 "" ) (ne .BcryptPass "") }}
+
+    <hr style="border: none; height: 1px; background-color: #555"/>
+
+    <div class="success-message-container" style="margin-top: 1em;">
+        <svg width="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM16.0303 8.96967C16.3232 9.26256 16.3232 9.73744 16.0303 10.0303L11.0303 15.0303C10.7374 15.3232 10.2626 15.3232 9.96967 15.0303L7.96967 13.0303C7.67678 12.7374 7.67678 12.2626 7.96967 11.9697C8.26256 11.6768 8.73744 11.6768 9.03033 11.9697L10.5 13.4393L12.7348 11.2045L14.9697 8.96967C15.2626 8.67678 15.7374 8.67678 16.0303 8.96967Z"
+                      fill="#00c950"></path>
+            </g>
+        </svg>
+
+        <span style="color:#00c950; border: none; font-weight: 700;">
+            Values generated successfully
+        </span>
+    </div>
+
+    {{ if ne .Sha256 "" }}
+    <div class="result-card">
+        <div class="left-header-container">
+            <div class="padlock-container">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#2b7fff">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M12 4.75C10.9396 4.75 10.0907 5.07796 8.06584 5.88789L5.25737 7.01128C4.24694 7.41545 3.54677 7.69659 3.09295 7.93451C3.0486 7.95776 3.00863 7.97959 2.97267 8C3.00863 8.02041 3.0486 8.04224 3.09295 8.06549C3.54677 8.30341 4.24694 8.58455 5.25737 8.98872L8.06584 10.1121C10.0907 10.922 10.9396 11.25 12 11.25C13.0604 11.25 13.9093 10.922 15.9342 10.1121L18.7426 8.98872C19.7531 8.58455 20.4532 8.30341 20.9071 8.06549C20.9514 8.04224 20.9914 8.02041 21.0273 8C20.9914 7.97959 20.9514 7.95776 20.9071 7.93451C20.4532 7.69659 19.7531 7.41545 18.7426 7.01128L15.9342 5.88789C13.9093 5.07796 13.0604 4.75 12 4.75ZM7.62442 4.4489C9.50121 3.69796 10.6208 3.25 12 3.25C13.3792 3.25 14.4988 3.69796 16.3756 4.4489C16.4138 4.4642 16.4524 4.47962 16.4912 4.49517L19.3451 5.6367C20.2996 6.01851 21.0728 6.32776 21.6035 6.60601C21.8721 6.74683 22.1323 6.90648 22.333 7.09894C22.5392 7.29668 22.75 7.59658 22.75 8C22.75 8.40342 22.5392 8.70332 22.333 8.90106C22.1323 9.09352 21.8721 9.25317 21.6035 9.39399C21.0728 9.67223 20.2996 9.98148 19.3451 10.3633L16.4912 11.5048C16.4524 11.5204 16.4138 11.5358 16.3756 11.5511C14.4988 12.302 13.3792 12.75 12 12.75C10.6208 12.75 9.50121 12.302 7.62443 11.5511C7.58619 11.5358 7.54763 11.5204 7.50875 11.5048L4.65495 10.3633C3.70036 9.98149 2.92721 9.67224 2.39647 9.39399C2.12786 9.25317 1.86765 9.09352 1.66701 8.90106C1.46085 8.70332 1.25 8.40342 1.25 8C1.25 7.59658 1.46085 7.29668 1.66701 7.09894C1.86765 6.90648 2.12786 6.74683 2.39647 6.60601C2.92721 6.32776 3.70037 6.01851 4.65496 5.63669L7.50875 4.49517C7.54763 4.47962 7.58618 4.4642 7.62442 4.4489ZM2.49896 11.4401L2.50261 11.4432C2.50702 11.4471 2.51522 11.4541 2.52722 11.4641C2.55123 11.4842 2.59042 11.5161 2.64479 11.5581C2.75354 11.6422 2.92289 11.7663 3.1528 11.9154C3.61265 12.2136 4.31419 12.6114 5.25737 12.9887L8.06584 14.1121C10.0907 14.922 10.9396 15.25 12 15.25C13.0604 15.25 13.9093 14.922 15.9342 14.1121L18.7426 12.9887C19.6858 12.6114 20.3874 12.2136 20.8472 11.9154C21.0771 11.7663 21.2465 11.6422 21.3552 11.5581C21.4096 11.5161 21.4488 11.4842 21.4728 11.4641C21.4848 11.4541 21.493 11.4471 21.4974 11.4432L21.4995 11.4415C21.5 11.441 21.5006 11.4405 21.5011 11.44C21.8095 11.1652 22.2823 11.1915 22.5583 11.4992C22.8349 11.8075 22.8091 12.2817 22.5008 12.5583L22 12C22.5008 12.5583 22.501 12.5581 22.5008 12.5583L22.4994 12.5595L22.4977 12.5611L22.493 12.5652L22.4793 12.5772C22.4682 12.5868 22.4532 12.5997 22.4341 12.6155C22.3961 12.6473 22.3422 12.6911 22.2724 12.745C22.1329 12.8528 21.9299 13.001 21.6634 13.1739C21.1303 13.5196 20.3424 13.9644 19.2997 14.3814L16.4912 15.5048C16.4524 15.5204 16.4138 15.5358 16.3756 15.5511C14.4988 16.302 13.3792 16.75 12 16.75C10.6208 16.75 9.50121 16.302 7.62443 15.5511C7.58619 15.5358 7.54763 15.5204 7.50875 15.5048L4.70029 14.3814C3.65759 13.9644 2.86971 13.5196 2.33662 13.1739C2.07005 13.001 1.86705 12.8528 1.72757 12.745C1.65782 12.6911 1.60392 12.6473 1.56587 12.6155C1.54684 12.5997 1.53177 12.5868 1.52066 12.5772L1.50696 12.5652L1.50233 12.5611L1.50057 12.5595L1.4995 12.5586C1.49934 12.5584 1.49919 12.5583 2 12L1.4995 12.5586C1.19116 12.282 1.16512 11.8075 1.44171 11.4992C1.71775 11.1915 2.19058 11.1652 2.49896 11.4401ZM21.4996 15.4414C21.5001 15.4409 21.5006 15.4405 21.5011 15.44C21.8095 15.1652 22.2823 15.1915 22.5583 15.4992C22.8349 15.8075 22.8091 16.2817 22.5008 16.5583L22 16C22.5008 16.5583 22.501 16.5581 22.5008 16.5583L22.4994 16.5595L22.4977 16.5611L22.493 16.5652L22.4793 16.5772C22.4682 16.5868 22.4532 16.5997 22.4341 16.6155C22.3961 16.6473 22.3422 16.6911 22.2724 16.745C22.1329 16.8528 21.9299 17.001 21.6634 17.1739C21.1303 17.5196 20.3424 17.9644 19.2997 18.3814L16.4912 19.5048C16.4524 19.5204 16.4138 19.5358 16.3756 19.5511C14.4988 20.302 13.3792 20.75 12 20.75C10.6208 20.75 9.50121 20.302 7.62443 19.5511C7.58619 19.5358 7.54763 19.5204 7.50875 19.5048L4.70029 18.3814C3.65759 17.9644 2.86971 17.5196 2.33662 17.1739C2.07005 17.001 1.86705 16.8528 1.72757 16.745C1.65782 16.6911 1.60392 16.6473 1.56587 16.6155C1.54684 16.5997 1.53177 16.5868 1.52066 16.5772L1.50696 16.5652L1.50233 16.5611L1.50057 16.5595L1.4995 16.5586C1.49934 16.5584 1.49919 16.5583 2 16L1.4995 16.5586C1.19116 16.282 1.16512 15.8075 1.44171 15.4992C1.71774 15.1915 2.19053 15.1652 2.49891 15.44C2.49871 15.4398 2.49911 15.4402 2.49891 15.44C2.4991 15.4402 2.49987 15.4409 2.50006 15.441C2.49991 15.4409 2.50022 15.4412 2.50006 15.441L2.50261 15.4432C2.50702 15.4471 2.51522 15.4541 2.52722 15.4641C2.55123 15.4842 2.59042 15.5161 2.64479 15.5581C2.75354 15.6422 2.92289 15.7663 3.1528 15.9154C3.61265 16.2136 4.31419 16.6114 5.25737 16.9887L8.06584 18.1121C10.0907 18.922 10.9396 19.25 12 19.25C13.0604 19.25 13.9093 18.922 15.9342 18.1121L18.7426 16.9887C19.6858 16.6114 20.3874 16.2136 20.8472 15.9154C21.0771 15.7663 21.2465 15.6422 21.3552 15.5581C21.4096 15.5161 21.4488 15.4842 21.4728 15.4641C21.4848 15.4541 21.493 15.4471 21.4974 15.4432L21.4996 15.4414Z"
+                              fill="#2b7fff"></path>
+                    </g>
+                </svg>
+            </div>
+            <div>
+                <h2 style="margin:0; padding: 0;">Session Value</h2>
+                <p style="border: none;margin: 0; padding:0;">
+                    Token used for the session payload
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <span style="display: inline-block; color: #8ec5ff; background-color: rgba(81, 162, 255, 0.2); padding: .8em; margin-top: .8em; border-radius: .8em; font-weight: 700;">
+                64 chars
+            </span>
+        </div>
+
+        <div style="display: flex; gap: 1em; align-items: center; grid-column: span 2;">
+            <p style="background-color: #222; border: 1px solid #555;" id="sha256-pass">
+                {{ .Sha256 }}
+            </p>
+
+            <button type="button" class="clipboard-button" id="sha256-button"
+                    onclick="copyTextToClipboard('sha256-button', 'sha256-pass')"
+            >
+                Copy
+            </button>
+        </div>
     </div>
 
 
-    {{ if ne .Sha256  "" }}    
-        <p>Value to session 
-            <span class="result-container" id="sha256-pass">{{.Sha256}}
-                <button type="button" class="clipboard-button" id="sha256-button"
-                    onclick="copyTextToClipboard('sha256-button', 'sha256-pass')"
-                >
-                    Copy
-                </button>
-            </span>
-        </p>
+    <!--    <p>Value to session-->
+    <!--        <span class="result-container" id="sha256-pass">{{.Sha256}}-->
+    <!--            -->
+    <!--            -->
+    <!--            -->
+    <!--                <button type="button" class="clipboard-button" id="sha256-button"-->
+    <!--                        onclick="copyTextToClipboard('sha256-button', 'sha256-pass')"-->
+    <!--                >-->
+    <!--                    Copy-->
+    <!--                </button>-->
+    <!--            </span>-->
+    <!--    </p>-->
     {{ end }}
 
     {{ if ne .BcryptPass ""}}
-        <p>Value to database 
-            <span class="result-container" id="bcrypt-pass">{{ .BcryptPass }}
-                <button type="button" class="clipboard-button" id="bcrypt-button"
-                onclick="copyTextToClipboard('bcrypt-button', 'bcrypt-pass')"
-                >
-                    Copy
-                </button>
+    <div class="result-card">
+        <div class="left-header-container">
+            <div class="gear-container">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path d="M20 7C20 9.20914 16.4183 11 12 11C7.58172 11 4 9.20914 4 7C4 4.79086 7.58172 3 12 3C16.4183 3 20 4.79086 20 7Z"
+                              stroke="#00c950" stroke-width="2"></path>
+                        <path d="M20 12C20 14.2091 16.4183 16 12 16C7.58172 16 4 14.2091 4 12" stroke="#00c950"
+                              stroke-width="2"></path>
+                        <path d="M4 7V17C4 19.2091 7.58172 21 12 21C16.4183 21 20 19.2091 20 17V7" stroke="#00c950"
+                              stroke-width="2"></path>
+                    </g>
+                </svg>
+            </div>
+            <div>
+                <h2 class="margin: 0; padding: 0;">
+                    Database hash
+                </h2>
+                <p style="margin: 0; padding: 0; border: none;">
+                    Hashed value to store in database
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <span style="display: inline-block; color: #05df72; background-color: rgba(5, 223, 114, 0.2); padding: .8em; margin-top: .8em; border-radius: .8em; font-weight: 700;">
+                bcrypt
             </span>
-        </p>
-    {{ end }}
+        </div>
+
+        <div style="display: flex; gap: 1em; align-items: center; grid-column: span 2;">
+            <p style="background-color: #222; border: 1px solid #555;" id="bcrypt-pass">
+                {{ .BcryptPass}}
+            </p>
+
+            <button type="button" class="clipboard-button" id="bcrypt-button"
+                    onclick="copyTextToClipboard('bcrypt-button', 'bcrypt-pass')"
+            >
+                Copy
+            </button>
+        </div>
     </div>
 
-    <script src="/static/main.js" defer></script>
-</body> 
+
+    <!--    <p>Value to database-->
+    <!--        <span class="result-container" id="bcrypt-pass">{{ .BcryptPass }}-->
+    <!--                <button type="button" class="clipboard-button" id="bcrypt-button"-->
+    <!--                        onclick="copyTextToClipboard('bcrypt-button', 'bcrypt-pass')"-->
+    <!--                >-->
+    <!--                    Copy-->
+    <!--                </button>-->
+    <!--            </span>-->
+    <!--    </p>-->
+    {{ end }}
+
+
+    <button class="eraser-button" id="eraser-button" type="button" onclick="eraseValues()">
+        <svg width="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <path d="M11.4096 5.50506C13.0796 3.83502 13.9146 3 14.9522 3C15.9899 3 16.8249 3.83502 18.4949 5.50506C20.165 7.1751 21 8.01013 21 9.04776C21 10.0854 20.165 10.9204 18.4949 12.5904L14.3017 16.7837L7.21634 9.69828L11.4096 5.50506Z"
+                      fill="#fff"></path>
+                <path d="M6.1557 10.759L13.2411 17.8443L12.5904 18.4949C12.2127 18.8727 11.8777 19.2077 11.5734 19.5H21C21.4142 19.5 21.75 19.8358 21.75 20.25C21.75 20.6642 21.4142 21 21 21H9C7.98423 20.9747 7.1494 20.1393 5.50506 18.4949C3.83502 16.8249 3 15.9899 3 14.9522C3 13.9146 3.83502 13.0796 5.50506 11.4096L6.1557 10.759Z"
+                      fill="#fff"></path>
+            </g>
+        </svg>
+    </button>
+
+    {{ end }}
+</div>
+
+<div class="footer-card">
+    <svg width="40px" fill="rgb(43, 127, 255)" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+        <g id="SVGRepo_iconCarrier"><title>notice</title>
+            <path d="M15.5 3.5c-7.18 0-13 5.82-13 13s5.82 13 13 13 13-5.82 13-13-5.82-13-13-13zM15.5 23.875c-0.829 0-1.5-0.672-1.5-1.5s0.671-1.5 1.5-1.5c0.828 0 1.5 0.672 1.5 1.5s-0.672 1.5-1.5 1.5zM17 17.375c0 0.828-0.672 1.5-1.5 1.5-0.829 0-1.5-0.672-1.5-1.5v-7c0-0.829 0.671-1.5 1.5-1.5 0.828 0 1.5 0.671 1.5 1.5v7z"></path>
+        </g>
+    </svg>
+
+    <div>
+        <h1 class="footer-title">
+            Important
+        </h1>
+        <p style="margin: 0; padding: 0; border: none; color: #aaa;">
+            Keep these values stored secure. Do not share them or store them in plain text.
+        </p>
+    </div>
+</div>
+
+<script src="/static/main.js" defer></script>
+</body>
 </html>
